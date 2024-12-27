@@ -25,14 +25,14 @@ public class Principal {
     public void exibeMenu() {
         System.out.println("Digite o nome da série: ");
         var nomeSerie = scanner.nextLine().replace(" ", "+").trim().toLowerCase();
-        var json = consumo.obterDados(ENDERECO + nomeSerie + apiKey);
+        var json = consumo.obterDados(ENDERECO + nomeSerie + "&apikey=" + apiKey);
         var dadosSerie = conversor.obterDados(json, DadosSerie.class);
         System.out.println(dadosSerie);
 
         List<DadosTemporada> temporadas = new ArrayList<>();
 
         for (int i = 1; i <= dadosSerie.totalTemporadas() ; i++) {
-            json = consumo.obterDados(ENDERECO + nomeSerie + "&season=" + i + apiKey);
+            json = consumo.obterDados(ENDERECO + nomeSerie + "&season=" + i + "&apikey=" + apiKey ); //coloque sua apiKey após o '&'
             var dadosTemporada = conversor.obterDados(json, DadosTemporada.class);
             temporadas.add(dadosTemporada);
         }
