@@ -32,7 +32,7 @@ public class Principal {
         List<DadosTemporada> temporadas = new ArrayList<>();
 
         for (int i = 1; i <= dadosSerie.totalTemporadas() ; i++) {
-            json = consumo.obterDados(ENDERECO + nomeSerie + "&season=" + i + "&apikey=" + apiKey ); //coloque sua apiKey após o '&'
+            json = consumo.obterDados(ENDERECO + nomeSerie + "&season=" + i + "&apikey=" + apiKey );
             var dadosTemporada = conversor.obterDados(json, DadosTemporada.class);
             temporadas.add(dadosTemporada);
         }
