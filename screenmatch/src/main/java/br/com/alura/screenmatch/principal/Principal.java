@@ -7,10 +7,7 @@ import io.github.cdimascio.dotenv.Dotenv;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Principal {
@@ -75,6 +72,18 @@ public class Principal {
                         + " | Episódio: " + e.getTitulo()
                         + " | Data lançamento: " + e.getDataLancamento().format(formatador)
                 ));
+
+        Map<Integer, Double> avaliacaoPorTemporada = episodios.stream()
+                .filter(e -> e.getAvaliacao() > 0.0)
+                .collect(Collectors.groupingBy(Episodio::getTemporada, Collectors.averagingDouble(Episodio::getAvaliacao)));
+
+        DoubleSummaryStatistics stats = episodios.stream()
+                .filter(e -> e.getAvaliacao() > 0.0)
+                .collect(Collectors.summarizingDouble(Episodio::getAvaliacao));
+        System.out.println("Média: " + stats.getAverage());
+        System.out.println("Melhor episódio: " + stats.getMax());
+        System.out.println("Pior episódio: " + stats.getMin());
+        System.out.println("Quantidade: " + stats.getCount());
 
         var dadosConvertidosJson = conversor.converteParaJson(temporadas);
 		escreveArquivo.escrever( nomeSerie.replace("+", "-") + ".json", dadosConvertidosJson);
