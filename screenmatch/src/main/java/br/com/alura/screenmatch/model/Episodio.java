@@ -72,7 +72,7 @@ public class Episodio {
     public String toString() {
         return  "Temporada = " + temporada +
                 ", Titulo = " + titulo +
-                ", Numero Episódio = " + numeroEpisodio +
+                ", Número Episódio = " + numeroEpisodio +
                 ", Avaliação = " + avaliacao +
                 ", Data Lançamento = " + dataLancamento;
     }
